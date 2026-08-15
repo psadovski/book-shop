@@ -81,6 +81,7 @@ public class Book {
     @ManyToMany
     @JoinTable(
             name = "book_author",
+            schema = "book_store",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id")
     )

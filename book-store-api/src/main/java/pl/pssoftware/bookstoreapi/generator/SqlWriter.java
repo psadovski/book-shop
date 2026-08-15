@@ -148,7 +148,7 @@ public class SqlWriter {
         writer.newLine();
         writer.write("""
                 SELECT setval(
-                    'book_store.publisher_sequence',
+                    'book_store.publisher_generator_sequence',
                     (SELECT MAX(id) FROM book_store.publisher)
                 );
                 """);
@@ -156,7 +156,7 @@ public class SqlWriter {
         writer.newLine();
         writer.write("""
                 SELECT setval(
-                    'book_store.author_sequence',
+                    'book_store.author_generator_sequence',
                     (SELECT MAX(id) FROM book_store.author)
                 );
                 """);
@@ -164,7 +164,7 @@ public class SqlWriter {
         writer.newLine();
         writer.write("""
                 SELECT setval(
-                    'book_store.book_sequence',
+                    'book_store.book_generator_sequence',
                     (SELECT MAX(id) FROM book_store.book)
                 );
                 """);
