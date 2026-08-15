@@ -23,6 +23,6 @@ public class Publisher {
     @SequenceGenerator(name = "publisher_generator", sequenceName = "publisher_generator_sequence")
     private Long id;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, length = 200)
     private String name;
 }

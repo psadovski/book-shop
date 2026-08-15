@@ -2,6 +2,8 @@ package pl.pssoftware.bookstoreapi.catalog.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -31,7 +34,7 @@ public class Book {
     @SequenceGenerator(name = "book_generator", sequenceName = "book_generator_sequence")
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 200)
     private String title;
 
     @Column(nullable = false, unique = true, length = 13)
@@ -41,6 +44,35 @@ public class Book {
 
     @Column(length = 100)
     private String releasePlace;
+
+    @Column(length = 20)
+    private String language;
+
+    private Integer pageCount;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 30)
+    private BookCategory category;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column(length = 500)
+    private String coverUrl;
+
+    @Column(precision = 2, scale = 1)
+    private BigDecimal rating;
+
+    private Integer reviewCount;
+
+    private Integer publishedYear;
+
+    private Integer stock;
+
+    private Boolean available;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id", nullable = false)

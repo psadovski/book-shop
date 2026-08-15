@@ -1,6 +1,6 @@
-version: '3.3'
+version: "3.9"
 volumes:
-  pg-data:
+  postgres-data:
 services:
   book-shop-db:
     container_name: book-shop-db
@@ -11,8 +11,6 @@ services:
       POSTGRES_PASSWORD: pssoftware
     ports:
       - 5432:5432
-    expose:
-      - 5432
     volumes:
-      - pg-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql
       - ./src/main/resources/db/init/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
