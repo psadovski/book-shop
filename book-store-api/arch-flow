@@ -1,0 +1,47 @@
+                         │   Angular    │
+                         └──────┬───────┘
+                                │
+                                ▼
+                         ┌──────────────┐
+                         │ API Gateway  │
+                         └──────┬───────┘
+                                │
+          ┌─────────────────────┼─────────────────────┐
+          ▼                     ▼                     ▼
+     Catalog                Order                  User
+          │                     │
+          │                     │
+    Elasticsearch            Kafka
+          │                     │
+          │          ┌──────────┼──────────┐
+          │          ▼          ▼          ▼
+          │       Payment    Shipping   Notification
+          │
+          ▼
+      PostgreSQL
+
+                         ┌──────────────┐
+                         │Recommendation│
+                         └──────┬───────┘
+                                │
+                       ┌────────┴────────┐
+                       ▼                 ▼
+                    Vector DB           LLM
+                       │                 │
+                       └───────┬─────────┘
+                               ▼
+                              RAG
+                               │
+                               ▼
+                             Agent
+                               │
+                 ┌─────────────┼─────────────┐
+                 ▼             ▼             ▼
+              Catalog        Order        Shipping
+
+
+AWS
+ │
+ └── S3
+      ├── book covers
+      └── invoices
