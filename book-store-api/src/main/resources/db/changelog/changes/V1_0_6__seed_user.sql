@@ -29,4 +29,4 @@ SELECT u.id,
 FROM book_store.user u
          JOIN book_store.role r
               ON r.name = 'ROLE_USER'
-WHERE u.email = 'test@test.pl';
+WHERE u.email = 'mail@mail.pl';
