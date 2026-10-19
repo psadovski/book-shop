@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.pssoftware.bookstoreapi.security.dto.LoginRequest;
 import pl.pssoftware.bookstoreapi.security.dto.LoginResponse;
+import pl.pssoftware.bookstoreapi.security.dto.RegisterRequest;
+import pl.pssoftware.bookstoreapi.security.dto.RegisterResponse;
 import pl.pssoftware.bookstoreapi.security.service.AuthService;
 
 @RestController
@@ -19,5 +21,10 @@ public class AuthController {
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
         return authService.login(request);
+    }
+
+    @PostMapping("/register")
+    public RegisterResponse register(@RequestBody RegisterRequest request) {
+        return authService.register(request);
     }
 }

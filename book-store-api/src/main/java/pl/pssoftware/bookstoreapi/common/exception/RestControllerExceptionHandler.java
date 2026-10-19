@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import pl.pssoftware.bookstoreapi.security.exception.UserAlreadyExistsException;
 
 import java.time.Instant;
 
@@ -21,16 +22,26 @@ public class RestControllerExceptionHandler {
     public ApiError handleEntityNotFoundException(
             EntityNotFoundException ex,
             HttpServletRequest request) {
+        return getApiError(request, ex.getMessage(), HttpStatus.NOT_FOUND, ErrorCode.ENTITY_NOT_FOUND);
+    }
 
-        log.warn("Exception for request {}: {}", request.getRequestURI(), ex.getMessage());
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiError handleUserAlreadyExists(UserAlreadyExistsException exception,
+                                            HttpServletRequest request) {
+        return getApiError(request, exception.getMessage(), HttpStatus.CONFLICT, ErrorCode.USER_ALREADY_EXISTS);
+    }
+
+    private static ApiError getApiError(HttpServletRequest request, String ex, HttpStatus notFound, ErrorCode entityNotFound) {
+        log.error("Exception for request {}: {}", request.getRequestURI(), ex);
 
         return ApiError.builder()
                 .timestamp(Instant.now())
-                .status(HttpStatus.NOT_FOUND.value())
-                .error(HttpStatus.NOT_FOUND.getReasonPhrase())
-                .message(ex.getMessage())
+                .status(notFound.value())
+                .error(notFound.getReasonPhrase())
+                .message(ex)
                 .path(request.getRequestURI())
-                .errorCode(ErrorCode.ENTITY_NOT_FOUND)
+                .errorCode(entityNotFound)
                 .build();
     }
 }

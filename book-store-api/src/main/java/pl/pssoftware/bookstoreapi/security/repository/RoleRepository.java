@@ -1,6 +1,7 @@
-package pl.pssoftware.bookstoreapi.security.entity;
+package pl.pssoftware.bookstoreapi.security.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import pl.pssoftware.bookstoreapi.security.entity.Role;
 
 import java.util.Optional;
 
